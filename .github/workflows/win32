@@ -213,7 +213,7 @@ jobs:
           owner_type: user
           untagged_only: true
   build_ffmpeg:
-    name: Build ffmpeg
+    name: Build Win32 Version
     if: ${{ ( github.event.inputs.buildOnly == 'true' && !cancelled() ) || success() }}
     needs: build_targets
     runs-on: ubuntu-latest
@@ -233,7 +233,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
-      - name: Build ffmpeg
+      - name: Build Win32 Version
         run: |
           T="$(echo -n ${{ github.token }} | sha256sum | head -c 64)" && echo -e "::add-mask::${T}\n::stop-commands::${T}"
           ./build.sh ${{ matrix.target }} ${{ matrix.variant }}
